@@ -22,6 +22,8 @@
     'index.html': ['Accueil', null],
     'epreuves.html': ['Les épreuves', 'index.html'],
     'deroulement.html': ['Le déroulement d’une épreuve', 'index.html'],
+    'securite-pas-de-tir.html': ['Sécurité et gestion du pas de tir', 'index.html'],
+    'moniteur-tar.html': ['Devenir moniteur TAR', 'index.html'],
     'c-est-nouveau.html': ["C'est nouveau", 'index.html'],
     'plan-du-site.html': ['Plan du site', 'index.html']
   };
