@@ -178,3 +178,51 @@
   function init() { crumbs(); burger(); totop(); sommMore(); }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
 })();
+
+/* MonTirSportif – « Grand affichage » pour les personnes qui voient mal (texte, boutons et contrastes agrandis) */
+(function () {
+  var K = 'mts-big';
+  function get() { try { return localStorage.getItem(K) === '1'; } catch (e) { return false; } }
+  function put(v) { try { localStorage.setItem(K, v ? '1' : '0'); } catch (e) {} }
+  if (!document.getElementById('mts-big-css')) {
+    var st = document.createElement('style'); st.id = 'mts-big-css';
+    st.textContent =
+      '.big-btn{display:inline-flex;align-items:center;gap:.35rem;flex:none;margin-left:auto;border:1px solid var(--line,#d3d9e1);background:var(--card,#fff);color:var(--txt,#1b2430);border-radius:99px;height:38px;padding:0 .8rem;font:inherit;font-size:.88rem;font-weight:600;cursor:pointer}' +
+      '.big-btn:hover{border-color:var(--mut,#5a6676)}.big-btn b{font-family:Georgia,serif;font-size:1.15em;line-height:1}' +
+      '.big-btn[aria-pressed="true"]{background:var(--txt,#1b2430);color:var(--card,#fff);border-color:var(--txt,#1b2430)}' +
+      '.big-btn+.burger,.big-btn+.srch-btn{margin-left:.4rem}' +
+      '@media(max-width:1240px){.big-btn span{display:none}.big-btn{padding:0 .7rem}}' +
+      'html.mts-big{font-size:125%;--mut:#2b3644;--line:#9aa5b4}' +
+      'html.mts-big body{font-size:20px;line-height:1.7}' +
+      'html.mts-big nav a{font-size:1rem;color:var(--txt)}' +
+      'html.mts-big .muted,html.mts-big small,html.mts-big figcaption{color:var(--txt)}' +
+      'html.mts-big a:focus-visible,html.mts-big button:focus-visible,html.mts-big select:focus-visible,html.mts-big input:focus-visible{outline:3px solid var(--acc,#e0601f);outline-offset:2px}' +
+      'html.mts-big .grid3{grid-template-columns:repeat(2,minmax(0,1fr))}' +
+      '@media(max-width:900px){html.mts-big .grid2,html.mts-big .grid3{grid-template-columns:minmax(0,1fr)}}' +
+      'html.mts-big header .big-btn,html.mts-big header .burger,html.mts-big header .srch-btn{height:46px;font-size:1rem}' +
+      '@media print{.big-btn{display:none!important}html.mts-big{font-size:100%}}';
+    document.head.appendChild(st);
+  }
+  function apply(v) {
+    document.documentElement.classList.toggle('mts-big', v);
+    Array.prototype.forEach.call(document.querySelectorAll('.big-btn'), function (b) {
+      b.setAttribute('aria-pressed', v ? 'true' : 'false');
+      b.title = v ? 'Revenir à l’affichage normal' : 'Grand affichage : texte et boutons plus grands';
+      b.querySelector('span').textContent = v ? 'Affichage normal' : 'Grand affichage';
+    });
+    try { document.dispatchEvent(new CustomEvent('mts-big', { detail: v })); } catch (e) {}
+  }
+  window.mtsBig = { get: get, set: function (v) { put(v); apply(v); } };
+  apply(get());
+  window.addEventListener('storage', function (e) { if (e.key === K) apply(get()); });
+  function btn() {
+    var bar = document.querySelector('header .bar');
+    if (!bar || bar.querySelector('.big-btn')) return;
+    var b = document.createElement('button'); b.type = 'button'; b.className = 'big-btn';
+    b.innerHTML = '<b aria-hidden="true">A+</b><span>Grand affichage</span>';
+    b.addEventListener('click', function () { window.mtsBig.set(!get()); });
+    bar.insertBefore(b, bar.querySelector('.burger') || bar.querySelector('.srch-btn') || null);
+    apply(get());
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', btn); else btn();
+})();
