@@ -42,6 +42,7 @@
     '.site-sw .sw-ico{width:16px;height:16px;border-radius:50%}.site-sw .on .sw-ico{background:#fff}' +
     '.crumbs .site-sw .on{background:var(--txt,#1b2430);color:#fff;font-weight:600}' +
     '.crumbs .site-sw a{color:var(--mut,#667);text-decoration:none;font-weight:500}.crumbs .site-sw a:hover{color:var(--acc);background:var(--bg2,#f4f6f8);text-decoration:none}' +
+    '@media(max-width:600px){.site-sw{display:flex;flex-wrap:wrap;width:fit-content;max-width:100%;border-radius:12px;margin-bottom:.25rem}}' +
     /* fil d'Ariane */
     '.crumbs{font-size:.82rem;color:var(--mut,#667);margin:0 0 .7rem;line-height:1.5}' +
     '.crumbs a{color:var(--mut,#667);text-decoration:none}.crumbs a:hover{color:var(--acc);text-decoration:underline}' +
