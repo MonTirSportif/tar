@@ -227,3 +227,73 @@
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', btn); else btn();
 })();
+
+/* MonTirSportif – fil d'Ariane : liste déroulante pour changer de site */
+(function () {
+  var me = document.currentScript || document.querySelector('script[src*="js/nav.js"]');
+  var base = me ? me.src.replace(/js\/nav\.js(\?.*)?$/, '') : '';
+  var S = [
+    ['pistol', 'Pistolet', 'Pistolet ISSF', 'picto-pistolet-fftir.png'],
+    ['rifle', 'Carabine', 'Carabine ISSF', 'picto-carabine-fftir.png'],
+    ['edt', 'École de tir', 'Les jeunes de 7 à 14 ans', 'fftir-ecole-de-tir.png'],
+    ['sq', 'SQ', 'Cible électronique Sport Quantum', 'picto-sq.png'],
+    ['tar', 'TAR', 'Tir aux armes réglementaires', 'picto-tar-fftir.png'],
+    ['handy', 'Handy', 'Handi-tir et para-tir', 'picto-handy.png'],
+    ['thot', 'Thot', 'Le dieu égyptien de l’écriture', 'picto-thot.png']
+  ];
+  if (!document.getElementById('mts-sitesw-css')) {
+    var st = document.createElement('style'); st.id = 'mts-sitesw-css';
+    st.textContent =
+      '.site-dd{position:relative;display:inline-block;vertical-align:middle;margin-right:.1rem}' +
+      '.site-dd>button{display:inline-flex;align-items:center;gap:.4rem;font:inherit;font-size:inherit;font-weight:600;color:#fff;background:var(--txt,#1b2430);border:1px solid var(--txt,#1b2430);border-radius:99px;padding:.15rem .7rem .15rem .35rem;cursor:pointer;line-height:1.5}' +
+      '.site-dd>button:hover,.site-dd>button[aria-expanded="true"]{background:var(--acc,#e0601f);border-color:var(--acc,#e0601f)}' +
+      '.site-dd .sw-ico{width:18px;height:18px;border-radius:50%;background:#fff;flex:none}' +
+      '.site-dd .caret{font-size:.75em;opacity:.85}' +
+      '.site-dd ul{position:absolute;z-index:40;top:calc(100% + 6px);left:0;min-width:260px;margin:0;padding:6px;list-style:none;background:var(--card,#fff);border:1px solid var(--line,#d5dbe3);border-radius:12px;box-shadow:0 10px 30px rgba(27,36,48,.18)}' +
+      '.site-dd ul[hidden]{display:none}' +
+      '.site-dd li a,.site-dd li span.cur{display:flex;align-items:center;gap:.6rem;padding:.45rem .6rem;border-radius:8px;color:var(--txt,#1b2430);text-decoration:none;line-height:1.25}' +
+      '.site-dd li a:hover,.site-dd li a:focus{background:var(--bg2,#f4f6f8);outline:none}' +
+      '.site-dd li span.cur{background:var(--bg2,#f4f6f8);font-weight:700}' +
+      '.site-dd li small{display:block;color:var(--mut,#5a6676);font-size:.8em;font-weight:400}' +
+      '.site-dd li .sw-ico{width:26px;height:26px;background:#fff;border:1px solid var(--line,#d5dbe3)}' +
+      '.site-dd li .ok{margin-left:auto;color:var(--acc,#e0601f)}' +
+      '@media print{.site-dd ul{display:none!important}}';
+    document.head.appendChild(st);
+  }
+  function current(sw) {
+    var h = (location.hostname || '').split('.')[0];
+    for (var i = 0; i < S.length; i++) if (S[i][0] === h) return S[i][0];
+    var t = (sw.querySelector('.on') || sw).textContent || '';
+    for (var j = 0; j < S.length; j++) if (t.indexOf(S[j][1]) >= 0) return S[j][0];
+    var m = location.pathname.match(/\/(pistol|rifle|edt|sq|thot|tar|handy)\//); return m ? m[1] : 'pistol';
+  }
+  function build() {
+    var sw = document.querySelector('.crumbs .site-sw');
+    if (!sw || sw.dataset.dd) return;
+    var cur = current(sw), c = S.filter(function (s) { return s[0] === cur; })[0] || S[0];
+    var dd = document.createElement('span'); dd.className = 'site-dd';
+    var id = 'site-dd-list';
+    var h = '<button type="button" aria-haspopup="true" aria-expanded="false" aria-controls="' + id + '" title="Changer de site MonTirSportif">' +
+      '<img class="sw-ico" src="' + base + 'img/' + c[3] + '" alt="">Site ' + c[1] + '<span class="caret" aria-hidden="true">▾</span></button><ul id="' + id + '" hidden aria-label="Les sites MonTirSportif">';
+    S.forEach(function (s) {
+      var inner = '<img class="sw-ico" src="' + base + 'img/' + s[3] + '" alt=""><span>' + s[1] + '<small>' + s[2] + '</small></span>';
+      h += s[0] === cur ? '<li><span class="cur" aria-current="true">' + inner + '<span class="ok" aria-hidden="true">✓</span></span></li>'
+                        : '<li><a href="https://' + s[0] + '.montirsportif.com/">' + inner + '</a></li>';
+    });
+    dd.innerHTML = h + '</ul>';
+    sw.dataset.dd = '1'; sw.parentNode.replaceChild(dd, sw);
+    var b = dd.querySelector('button'), ul = dd.querySelector('ul');
+    function open(v, focus) { ul.hidden = !v; b.setAttribute('aria-expanded', v ? 'true' : 'false'); if (v && focus) { var f = ul.querySelector('a'); if (f) f.focus(); } }
+    b.addEventListener('click', function (e) { e.stopPropagation(); open(ul.hidden, false); });
+    b.addEventListener('keydown', function (e) { if (e.key === 'ArrowDown') { e.preventDefault(); open(true, true); } });
+    ul.addEventListener('keydown', function (e) {
+      var l = Array.prototype.slice.call(ul.querySelectorAll('a')), i = l.indexOf(document.activeElement);
+      if (e.key === 'ArrowDown') { e.preventDefault(); (l[i + 1] || l[0]).focus(); }
+      else if (e.key === 'ArrowUp') { e.preventDefault(); (l[i - 1] || l[l.length - 1]).focus(); }
+      else if (e.key === 'Escape') { open(false); b.focus(); }
+    });
+    document.addEventListener('click', function (e) { if (!dd.contains(e.target)) open(false); });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !ul.hidden) { open(false); b.focus(); } });
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', function () { setTimeout(build, 0); }); else setTimeout(build, 0);
+})();
