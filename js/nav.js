@@ -29,6 +29,7 @@
     'encadrer.html': ['Accueillir et encadrer une séance', 'moniteur-tar.html'],
     'le-club.html': ['Le moniteur dans son club', 'moniteur-tar.html'],
     'c-est-nouveau.html': ["C'est nouveau", 'index.html'],
+    'navigation.html': ['Naviguer dans le site', 'index.html'],
     'annonce.html': ['Mon annonce', 'index.html'],
     'plan-du-site.html': ['Plan du site', 'index.html']
   };
@@ -122,6 +123,7 @@
     });
     h('Se repérer');
     add(rel('c-est-nouveau.html'), ico('star') + "C'est nouveau");
+    add(rel('navigation.html'), ico('compass') + 'Naviguer dans le site');
     add(rel('plan-du-site.html'), ico('map') + 'Plan du site');
     h('Aussi chez MonTirSportif');
     [['https://pistol.montirsportif.com/', 'Le site Pistolet ↗'], ['https://rifle.montirsportif.com/', 'Le site Carabine ↗'], ['https://edt.montirsportif.com/', 'Le site École de tir ↗'], ['https://sq.montirsportif.com/', 'SQ ↗'], ['https://thot.montirsportif.com/', 'Le site Thot ↗']].forEach(function (x) { var l = add(x[0], x[1]); l.target = '_blank'; l.rel = 'noopener'; });
