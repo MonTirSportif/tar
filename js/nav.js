@@ -29,6 +29,7 @@
     'encadrer.html': ['Accueillir et encadrer une séance', 'moniteur-tar.html'],
     'le-club.html': ['Le moniteur dans son club', 'moniteur-tar.html'],
     'c-est-nouveau.html': ["C'est nouveau", 'index.html'],
+    'annonce.html': ['Mon annonce', 'index.html'],
     'plan-du-site.html': ['Plan du site', 'index.html']
   };
 
