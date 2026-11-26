@@ -240,7 +240,7 @@
     ['edt', 'École de tir', 'Les jeunes de 7 à 14 ans', 'fftir-ecole-de-tir.png'],
     ['sq', 'SQ', 'Cible électronique Sport Quantum', 'picto-sq.png'],
     ['tar', 'TAR', 'Tir aux armes réglementaires', 'picto-tar-fftir.png'],
-    ['handy', 'Handy', 'Handi-tir et para-tir', 'picto-handy.png'],
+    ['handi', 'Handi', 'Handi-tir et para-tir', 'picto-handy.png'],
     ['club', 'Club', 'La vie du club', 'picto-club.png'],
     ['thot', 'Thot', 'Le dieu égyptien de l’écriture', 'picto-thot.png']
   ];
@@ -268,7 +268,7 @@
     for (var i = 0; i < S.length; i++) if (S[i][0] === h) return S[i][0];
     var t = (sw.querySelector('.on') || sw).textContent || '';
     for (var j = 0; j < S.length; j++) if (t.indexOf(S[j][1]) >= 0) return S[j][0];
-    var m = location.pathname.match(/\/(pistol|rifle|edt|sq|thot|tar|handy|club)\//); return m ? m[1] : 'pistol';
+    var m = location.pathname.match(/\/(pistol|rifle|edt|sq|thot|tar|handi|club)\//); return m ? m[1] : 'pistol';
   }
   function build() {
     var sw = document.querySelector('.crumbs .site-sw');
