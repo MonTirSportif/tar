@@ -49,10 +49,11 @@
 </head>
 <body>
 <header><div class="bar"><a class="logo" href="index.html" aria-label="MonTirSportif TAR — accueil"><img src="img/logo.png" alt="MonTirSportif"></a>
-<nav id="nav"><a href="index.html">Accueil</a><a href="epreuves.html">Les épreuves</a><a href="technique.html">Technique</a><a href="techniques-tar.html">Gongs et vitesse</a><a href="securite-pas-de-tir.html">Sécurité</a><a href="moniteur-tar.html">Moniteur TAR</a><a href="annonce.html">Mon annonce</a></nav></div></header>
+<nav id="nav"><a href="index.html">Accueil</a><a href="epreuves.html">Les épreuves</a><a href="technique.html">Technique</a><a href="techniques-tar.html">Gongs et vitesse</a><a href="securite-pas-de-tir.html">Sécurité</a><a href="moniteur-tar.html">Moniteur TAR</a><a href="annonce.html">Mon annonce</a></nav><button type="button" class="srch-btn" id="srch-btn" aria-label="Rechercher dans le site" title="Rechercher (touche /)"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="2.2"/><line x1="15.5" y1="15.5" x2="21" y2="21" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg><span>Rechercher</span></button></div></header>
 <main class="view on" id="c-est-nouveau" style="--acc:#e5473d">
 <div class="theme-head"><a class="back" href="index.html">← Retour</a><div class="kicker">Se repérer</div><h1>C’est nouveau</h1><p class="lead">Les nouveautés et modifications du site TAR, une par une.</p></div>
 <section class="first"><div class="links">
+<a href="index.html"><b>Bouton « Rechercher »</b><small>26 novembre 2026 · En haut de chaque page, le bouton « Rechercher » (ou la touche /) trouve en un instant une page ou un chapitre du site.</small></a>
 <a href="navigation.html"><b>Naviguer dans le site</b><small>26 novembre 2026 · Nouvelle page : accès direct par thème, parcours selon votre profil et astuces selon votre écran. Avec son bouton en haut de l’accueil et dans le menu.</small></a>
 <a href="index.html"><b>Changer de site depuis le fil d’Ariane</b><small>26 novembre 2026 · En haut de chaque page, le bouton du site où vous êtes ouvre une liste déroulante des sept sites MonTirSportif : Pistolet, Carabine, École de tir, SQ, TAR, Handy et Thot.</small></a>
 <a href="annonce.html"><b>Nouvelle application : Mon annonce</b><small>25 novembre 2026 · Annoncez chaque coup sur un carton ISSF, puis touchez l’impact réel : annonces justes selon 5 étapes et 4 niveaux de précision, écart moyen, tendance, notes sur le lâcher, historique et export CSV.</small></a>
@@ -82,5 +83,6 @@ document.getElementById('ck-no').addEventListener('click',function(){save('no');
 document.addEventListener('click',function(e){if(e.target.closest('[data-cookies]')){e.preventDefault();b.hidden=false;document.getElementById('ck-no').focus();}});})();</script>
 <script src="js/share.js"></script>
 <script src="js/nav.js?v=20261126nav" defer></script>
+<script src="js/search.js" data-base=""></script>
 </body>
 </html>
