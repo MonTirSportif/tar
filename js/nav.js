@@ -126,7 +126,7 @@
     add(rel('navigation.html'), ico('compass') + 'Naviguer dans le site');
     add(rel('plan-du-site.html'), ico('map') + 'Plan du site');
     h('Aussi chez MonTirSportif');
-    [['https://pistol.montirsportif.com/', 'Le site Pistolet ↗'], ['https://rifle.montirsportif.com/', 'Le site Carabine ↗'], ['https://edt.montirsportif.com/', 'Le site École de tir ↗'], ['https://sq.montirsportif.com/', 'SQ ↗'], ['https://thot.montirsportif.com/', 'Le site Thot ↗']].forEach(function (x) { var l = add(x[0], x[1]); l.target = '_blank'; l.rel = 'noopener'; });
+    [['https://pistol.montirsportif.com/', 'Le site Pistolet ↗'], ['https://rifle.montirsportif.com/', 'Le site Carabine ↗'], ['https://edt.montirsportif.com/', 'Le site École de tir ↗'], ['https://sq.montirsportif.com/', 'SQ ↗'], ['https://thot.montirsportif.com/', 'Le site Thot ↗'], ['https://club.montirsportif.com/', 'Le site Club ↗']].forEach(function (x) { var l = add(x[0], x[1]); l.target = '_blank'; l.rel = 'noopener'; });
     document.body.appendChild(m);
 
     function place() { var r = document.querySelector('header').getBoundingClientRect(); m.style.top = Math.max(0, r.bottom) + 'px'; }
@@ -241,6 +241,7 @@
     ['sq', 'SQ', 'Cible électronique Sport Quantum', 'picto-sq.png'],
     ['tar', 'TAR', 'Tir aux armes réglementaires', 'picto-tar-fftir.png'],
     ['handy', 'Handy', 'Handi-tir et para-tir', 'picto-handy.png'],
+    ['club', 'Club', 'La vie du club', 'picto-club.png'],
     ['thot', 'Thot', 'Le dieu égyptien de l’écriture', 'picto-thot.png']
   ];
   if (!document.getElementById('mts-sitesw-css')) {
@@ -267,7 +268,7 @@
     for (var i = 0; i < S.length; i++) if (S[i][0] === h) return S[i][0];
     var t = (sw.querySelector('.on') || sw).textContent || '';
     for (var j = 0; j < S.length; j++) if (t.indexOf(S[j][1]) >= 0) return S[j][0];
-    var m = location.pathname.match(/\/(pistol|rifle|edt|sq|thot|tar|handy)\//); return m ? m[1] : 'pistol';
+    var m = location.pathname.match(/\/(pistol|rifle|edt|sq|thot|tar|handy|club)\//); return m ? m[1] : 'pistol';
   }
   function build() {
     var sw = document.querySelector('.crumbs .site-sw');
